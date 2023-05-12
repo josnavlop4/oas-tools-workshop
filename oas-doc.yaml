@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Occupation API
+  description: API for occupation stats 
+
+paths:
+  /api/v1/occupationstats:
+    x-router-controller: occupationstatsController
+    get:
+      description: Returns all occupationstats
+      operationId: getOccupationstats
+      responses:
+        200:
+          description: Occupationstat list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/occupationstat'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/v1/occupationstats/{month}:
+    x-router-controller: occupationstatsController
+    get:
+      description: Returns a single occupationstat by its month
+      operationId: findBymonth
+      parameters:
+        - required: true
+          name: month
+          description: month of the occupationstat to fetch
+          in: path
+          schema:
+            type: string
+      responses:
+        200:
+          description: Occupationstat found by month
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/occupationstat'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+components:
+  schemas:
+    occupationstat:
+        type: object
+        required:
+          - month
+        properties:
+          province:
+            type: string
+          month:
+            type: string
+          traveler:
+            type: number
+          overnight_stay:
+            type: number
+          average_stay:
+            type: number
+    error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+      additionalProperties: true
