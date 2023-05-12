@@ -1,12 +1,14 @@
 export function getOccupationstats(req, res) {
-    res.send({
-        message: 'This is the mockup controller for getOccupationstats'
-    });
+    res.send([{
+        province:"Jaen",
+        month:"Enero"
+    }]);
 }
 
 export function findBymonth(req, res) {
     res.send({
-        message: 'This is the mockup controller for findBymonth'
+        province:"Jaen",
+        month:"Enero"
     });
 }
 
